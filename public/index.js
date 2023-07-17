@@ -12,7 +12,7 @@ form.addEventListener('submit', async (event) => {
     };
     if (id === '') {
       try {
-        await axios.post('http://localhost:3000', obj);
+        await axios.post('http://localhost:3000/user', obj);
         await displayData();
         form.reset();
       } catch (error) {
@@ -20,7 +20,7 @@ form.addEventListener('submit', async (event) => {
       }
     } else {
       try {
-        await axios.put(`http://localhost:3000/${id}`, obj);
+        await axios.put(`http://localhost:3000/user/${id}`, obj);
         await displayData();
         form.reset();
       } catch (error) {
@@ -33,7 +33,7 @@ form.addEventListener('submit', async (event) => {
 
 async function displayData() {
     try {
-        const response = await axios.get('http://localhost:3000');
+        const response = await axios.get('http://localhost:3000/user');
         const electronic_ul = document.getElementById('electronic_items');
         const food_ul = document.getElementById('food_items');
         const skincare_ul = document.getElementById('skincare_items');
@@ -77,7 +77,7 @@ async function displayData() {
 
 async function deleteData(id) {
     try {
-        await axios.delete(`http://localhost:3000/${id}`);
+        await axios.delete(`http://localhost:3000/user/${id}`);
         await displayData();
     } catch (error) {
         console.log(error);
@@ -86,7 +86,7 @@ async function deleteData(id) {
 
 async function editData(editId) {
   try {
-    const response = await axios.get('http://localhost:3000');
+    const response = await axios.get('http://localhost:3000/user');
     const data = response.data;
     if (data !== null) {
       const user = data.find((item) => item.id === editId);
